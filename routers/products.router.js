@@ -15,10 +15,10 @@ const router = express.Router();
 router.use('/:productId/reviews', reviewRouter);
 
 router.route('/top-5-products').get(aliasTopProducts, getAllProducts)
+router.get('/', getAllProducts)
+router.get("/:id", getProduct)
 
 router.use(protect);
-router.get("/:id", getProduct)
-router.get('/', getAllProducts)
 
 router.use(restrictTo('admin'));
 router.post('/', createProduct);
