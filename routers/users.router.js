@@ -6,6 +6,7 @@ const {
   getUser,
   getMe,
   deleteUser,
+  updateUser,
 } = require("../controllers/user.controller");
 const {
   signup,
@@ -32,6 +33,6 @@ router.get('/me', getMe);
 
 router.use(restrictTo("admin"));
 router.get("/", getAllUsers);
-router.route("/:id").get( getUser).delete(deleteUser);
+router.route("/:id").get( getUser).delete(deleteUser).patch(updateUser);
 
 module.exports = router;
