@@ -8,20 +8,12 @@ exports.setUserId = (req, res, next)=>{
   next();
 }
 
-// exports.createOrder = catchAsync(async (req, res, next) => {
-//   const order = await Order.create(req.body);
-
-//   res.status(201).json({
-//     status: "success",
-//     data: {
-//       order,
-//     },
-//   });
-// });
-
 exports.createOrder = factory.createOne(Order);
-
 exports.getOrder = factory.getOne(Order, {path: 'user'});
+exports.getAllOrders = factory.getAll(Order);
+exports.updateOrder = factory.updateOne(Order);
+exports.deleteOrder = factory.deleteOne(Order);
+
 exports.getMyOrders = catchAsync(async (req, res) => {
   const myOrders = await Order.find({user: req.user.id})
 
@@ -32,15 +24,3 @@ exports.getMyOrders = catchAsync(async (req, res) => {
     },
   });
 });
-
-
-exports.getAllOrders = catchAsync(async (req, res, next) => {
-  const orders = await Order.find();
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      orders
-    }
-  })
-})
