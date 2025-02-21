@@ -17,7 +17,8 @@ const orderSchema = mongoose.Schema({
   ],
   totalPrice: { type: Number, required: false },
   createdAt: { type: Date, default: Date.now }, 
-  // address: { type: String, required: [true, "Address field cannot be empty!"] },
+  address: { type: String, required: [true, "Address field cannot be empty!"] },
+  phone: { type: String, required: [true, "Phone field cannot be empty!"] },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
