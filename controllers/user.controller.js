@@ -55,7 +55,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   })
 });
 
-exports.uploadImage =  catchAsync(async (req, res, next)=>{
+exports.uploadImage =  (req, res)=>{
   cloudinary.uploader.upload(req.file.path, async function(err, result){
     if(err){
       console.log(err);
@@ -73,7 +73,7 @@ exports.uploadImage =  catchAsync(async (req, res, next)=>{
 
     await User.findByIdAndUpdate(req.user._id, { photo: result.url });
   })
-})
+}
 
 exports.getUser = factory.getOne(User);
 exports.getAllUsers = factory.getAll(User);
