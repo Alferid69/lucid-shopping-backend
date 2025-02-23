@@ -50,6 +50,7 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin", "delivery"],
       default: "user",
     },
+    photo: {type: String },
     passwordResetToken: String,
     passwordResetTokenExpires: Date,
     passwordChangedAt: Date,

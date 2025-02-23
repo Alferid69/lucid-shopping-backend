@@ -1,3 +1,4 @@
+const { v2: cloudinary } = require("cloudinary");
 const User = require("../models/user.model");
 const catchAsync = require("../utils/catchAsync");
 const factory = require('./handleFactory')
@@ -53,6 +54,26 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null
   })
 });
+
+exports.uploadImage =  catchAsync(async (req, res, next)=>{
+  cloudinary.uploader.upload(req.file.path, async function(err, result){
+    if(err){
+      console.log(err);
+      res.status(400).json({
+        status: 'fail',
+        message: 'Error uploading file'
+      })
+    }
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Image uploaded successfully',
+      data: result
+    })
+
+    await User.findByIdAndUpdate(req.user._id, { photo: result.url });
+  })
+})
 
 exports.getUser = factory.getOne(User);
 exports.getAllUsers = factory.getAll(User);

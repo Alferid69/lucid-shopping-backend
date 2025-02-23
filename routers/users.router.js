@@ -7,6 +7,7 @@ const {
   getMe,
   deleteUser,
   updateUser,
+  uploadImage,
 } = require("../controllers/user.controller");
 const {
   signup,
@@ -17,6 +18,7 @@ const {
   updatePassword,
   restrictTo,
 } = require("../controllers/auth.controller");
+const upload = require("../middleware/multer");
 const router = express.Router();
 
 router.post("/signup", signup);
@@ -30,6 +32,7 @@ router.patch("/updateMyPassword", protect, updatePassword);
 router.patch("/updateMe", protect, updateMe);
 router.delete("/deleteMe", protect, deleteMe);
 router.get('/me', getMe);
+router.post('/upload', upload.single('image'), uploadImage);
 
 router.use(restrictTo("admin"));
 router.get("/", getAllUsers);
