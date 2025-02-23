@@ -1,4 +1,4 @@
-const { v2: cloudinary } = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 const User = require("../models/user.model");
 const catchAsync = require("../utils/catchAsync");
 const factory = require('./handleFactory')
