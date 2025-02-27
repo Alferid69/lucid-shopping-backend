@@ -12,7 +12,8 @@ const orderSchema = mongoose.Schema({
       },
       name: {type: String},
       price: { type: Number }, 
-      quantity: { type: Number, required: true, min: 1 }
+      quantity: { type: Number, required: true, min: 1 },
+      category: { type: String },
     },
   ],
   totalPrice: { type: Number, required: false },
@@ -68,6 +69,7 @@ orderSchema.pre("save", async function (next) {
       }
       item.name = product.name;
       item.price = product.price;
+      item.category = product.category;
       // Add to totalPrice
       this.totalPrice += product.price * item.quantity;
     }
