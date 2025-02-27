@@ -20,6 +20,6 @@ exports.uploadImage = (req, res) => {
       data: result,
     });
 
-    await User.findByIdAndUpdate(req.user._id, { photo: result.url });
+    // await User.findByIdAndUpdate(req.user._id, { photo: result.url });
   });
 };
